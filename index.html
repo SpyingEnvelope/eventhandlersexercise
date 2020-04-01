@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ballon</title>
+    </head>
+    <body>
+        <p style="font-size: 10px;">🎈</p>
+    </body>
+    <script>
+        window.addEventListener("keyup", event => {
+            let paraSelector = document.querySelector('p');
+            let balloonSize = paraSelector.style.fontSize;
+            let inflate = balloonSize + 10;
+            console.log(inflate);
+            console.log(balloonSize);
+            paraSelector.style.cssText = `font-size: ${inflate}px`;
+        })
+    </script>
+</html>
