@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ballon</title>
+        <title>Balloon</title>
     </head>
     <body>
         <p style="font-size: 10px;">🎈</p>
     </body>
     <script>
-        window.addEventListener("keyup", event => {
+        window.addEventListener("keyup", inflateDeflate);
+
+        function inflateDeflate(event) {
+        if (event.key === "ArrowUp") {
             let paraSelector = document.querySelector('p');
             let balloonSize = paraSelector.style.fontSize;
-            let inflate = balloonSize + 10;
-            console.log(inflate);
-            console.log(balloonSize);
+            let balloonNumber = parseFloat(balloonSize);
+            let inflate = balloonNumber + (balloonNumber / 10);
             paraSelector.style.cssText = `font-size: ${inflate}px`;
-        })
+            if (balloonNumber > 200) {
+                paraSelector.textContent = "💥";
+                window.removeEventListener('keyup', inflateDeflate);
+            }
+        }
+        else if (event.key === "ArrowDown") {
+            let paraSelector = document.querySelector('p');
+            let balloonSize = paraSelector.style.fontSize;
+            let balloonNumber = parseFloat(balloonSize);
+            let deflate = balloonNumber - (balloonNumber / 10);
+            paraSelector.style.cssText = `font-size: ${deflate}px`;
+        }}
     </script>
 </html>
