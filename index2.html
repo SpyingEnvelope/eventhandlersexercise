@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mouse trail</title>
+    </head>
+    <style>
+        .trail { /* className for the trail elements */
+          position: absolute;
+          height: 6px; width: 6px;
+          border-radius: 3px;
+          background: teal;
+        }
+        body {
+          height: 300px;
+        }
+      </style>
+
+      <body>
+          <div></div>
+      </body>
+      
+      <script>
+        window.addEventListener('mousemove', mouseTrail);
+
+        function mouseTrail(event) {
+            let divSelector = document.querySelector('div');
+            document.body.removeChild(divSelector);
+            let dot = document.createElement('div');
+            dot.className = 'trail';
+            dot.style.left = (event.clientX + 12) + "px";
+            dot.style.top = (event.clientY + 12) + "px";
+            document.body.appendChild(dot);
+        }
+      </script>
+</html>
