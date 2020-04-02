@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tab interface</title>
+    </head>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .selected {
+            display: "";
+        }
+
+         button {
+             border: 1px solid black;
+             width: 50px;
+             height: 50px;
+             background-color: black;
+             color: white;
+             margin-left: 1em;
+         }
+
+         p {
+             font-size: xx-large;
+             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         }
+    </style>
+    <body>
+        <tab-panel>
+            <div data-tabname="one">Tab one<span></span></div>
+            <div data-tabname="two">Tab two<span></span></div>
+            <div data-tabname="three">Tab three<span></span></div>
+          </tab-panel>
+          <script>
+              let panelSelector = document.querySelectorAll('div');
+
+              for (let i = 0; i < panelSelector.length; i++) {
+                  panelSelector[i].className = 'hidden';
+              }
+
+              for (let i = 0; i < panelSelector.length; i++) {
+                  let divText = panelSelector[i].textContent;
+                  let buttonCreator = document.createElement('button');
+                  buttonCreator.textContent = divText;
+                  buttonCreator.id = "button" + i;
+                  document.body.appendChild(buttonCreator);
+              }
+              for (let i = 0; i < panelSelector.length; i++) {  
+                  let paraCreator = document.createElement('p');
+                  paraCreator.textContent = panelSelector[i].getAttribute('data-tabname');
+                  paraCreator.className = 'hidden';
+                  paraCreator.id = "para" + i;
+                  document.body.appendChild(paraCreator);
+              }
+
+              let buttonSelector = document.querySelectorAll('button');
+              console.log(buttonSelector[0].textContent);
+
+              for (let i = 0; i < buttonSelector.length; i++) {
+                  buttonSelector[i].addEventListener('click', asTabs);
+              }
+            function asTabs(node) {
+              console.log(node.target.id);
+              let paraSelector = document.querySelectorAll('p');
+              for (i = 0; i < buttonSelector.length; i++) {
+                if (node.target.id == "button" + i && paraSelector[i].className == 'hidden') {
+                   paraSelector[i].className = "selected";
+              }
+              else if (node.target.id == 'button' + i && paraSelector[i].className == 'selected') {
+                  paraSelector[i].className = 'hidden';
+              }
+              }
+            }
+            asTabs(document.querySelector("tab-panel"));
+          </script>
+    </body>
+</html>
